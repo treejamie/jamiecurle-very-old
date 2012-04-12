@@ -1,10 +1,7 @@
-markdown
-pygments
-BeautifulSoup
-Flask
-Flask-Markdown
-python-memcached
+Django==1.4
 uwsgi
-
+south
+django-compressor
+https://github.com/obscuremetaphor/obscuremetaphor-blog/zipball/master
 
 

@@ -1,19 +1,14 @@
+{% load compress %}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0 width=device-width">
 		<title>{% block title %}{% endblock %}</title>
-		{% if config.DEBUG == True %}
-		<link rel="stylesheet" href="/static/css/global.css" media="screen" type="text/css">
-		<link rel="stylesheet" href="/static/css/syntax.css" media="screen" type="text/css">
-		<link rel="stylesheet" href="/static/css/devices.css" media="screen" type="text/css">
-		<link rel="stylesheet" href="/static/css/fonts.css" media="screen" type="text/css">
-		{% else %}
-		<link rel="stylesheet" href="/static/css/production.css" media="screen" type="text/css">
-		{% endif %}
-		{% block css %}
-		{% endblock %}
+		{% compress css %}
+		<link rel="stylesheet" href="/static/css/global.scss" media="screen" type="text/x-sass">
+		<link rel="stylesheet" href="/static/css/devices.scss" media="screen" type="text/x-sass">
+		{% endcompress %}
 	</head>
 	<body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
 		<header class="primary">

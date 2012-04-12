@@ -1,19 +1,84 @@
-from fabric.api import *
-import datetime
 import os
 import memcache
+import yaml
+from fabric.api import *
 
-env.hosts = ['curle.webfactional.com']
-env.user = 'curle'
+LOCAL_ROOT = os.path.dirname(os.path.abspath(__file__))
+#
+#
+#---------------------- CONFIG --------------------------
+stream = open('%s/fabfile.yaml' % LOCAL_ROOT, 'r')
+configfile = yaml.load(stream)
+stream.close()
+for key, value in configfile.items():
+    setattr(env, key, value)
+#
+#
+# ------------------- DEVLOPMENT--------------------------
 
+def test(apps=""):
+    """Clears the screen and runs the tests om the test project"""
+    local('clear')
+    local('%s/manage.py test %s --setting=jamiecurle.settings.test'\
+                 % ( LOCAL_ROOT, apps))
 
-
-def clear_cache_dev(key=None):
+def kill_cache_dev(key=None):
     mc = memcache.Client(['127.0.0.1:11211'], debug=0)
     if key is None:
         mc.flush_all()
     else:
         mc.delete(key)
+
+#
+#
+# -------------------- OMBLOG
+@with_settings(warn_only=True)
+def install_production_omblog():
+    """installs cccheckout using the version in the requirements file"""
+    req = local('cat requirements.txt | grep obscuremetaphor-blog',
+                capture=True)
+    remove_cccheckout()
+    local('pip install %s' % req)
+
+
+@with_settings(warn_only=True)
+def remove_omblog():
+    """removees cccheckout completly"""
+    #with hide('stderr', 'warnings', 'stdout'):
+    local('pip uninstall obscuremetaphor-blog')
+    local('rm -rf %(site_packages)s/omblog' % env)
+
+def edit_dev_omblog():
+    """opens cccheckout in TextMate"""
+    local('mate %(omblog_project)s' % env)
+
+
+@with_settings(warn_only=True)
+def install_dev_omblog():
+    """Installs the development copy of cccheckout"""
+    remove_omblog()
+    local('ln -s %(omblog_src)s %(site_packages)s/omblog' % env )
+
+
+
+
+#
+#
+# ---------------------- OLDSTUFF ------------------------
+"""
+#import datetime
+#import memcache
+
+@with_settings(warn_only=True):
+def install_dev_omblog():
+
+    local('rm -rf %s/omblog %s/obscuremetaphor_blog-0.0.3-py2.7.egg-info' % 
+                (om_settings.SITE_PACKAGES, om_settings.SITE_PACKAGES))
+    local('ln -s  %s %somblog' % 
+                (om_settings.DEV_OMBLOG_PATH, om_settings.SITE_PACKAGES))
+
+
+
 
 def compress_css():
     with lcd('/Users/jcurle/Sites/jamiecurle/jamiecurle/static/css/'):
@@ -25,30 +90,4 @@ def mem():
 def restart_nginx():
     run('nginx -s reload')
 
-def clear_cache():
-    run('/home/curle/.virtualenvs/jamiecurle/bin/python2.7 -c "import memcache;MC = memcache.Client([\'unix:/home/curle/tmp/memcached.sock\'], debug=0);MC.flush_all()"')
-    #run('rm /home/curle/tmp/memcached.sock;')
-    #run('memcached -d -m 10m -s /home/curle/tmp/memcached.sock')
-
-
-def deploy(message=None):
-    # compress css
-    compress_css()
-    # commit and push to github
-    if message is not None:
-        with settings(warn_only=True):
-            local('git add -A')
-            local('git commit -a -m "%s"' % message)
-            local('git push origin master')
-    # rsync the media
-    with lcd('/Users/jcurle/Sites/jamiecurle/jamiecurle/media'):
-        local('rsync -avz -e ssh . curle@curle.webfactional.com:/home/curle/sites/jamiecurle/media')
-    #maintenance()
-    run('cd sites/jamiecurle/jamiecurle/; git pull origin master')
-    # restart the app
-    run('touch /home/curle/sites/jamiecurle/uwsgi')
-    # restart_nginx
-    restart_nginx()
-    #maintenance_end()
-    clear_cache()
-
+"""

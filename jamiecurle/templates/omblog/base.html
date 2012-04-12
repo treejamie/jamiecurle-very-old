@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block body_id %}blog{% endblock %}
+
+{% block content %}
+	{% block blog_content %}
+
+	{% endblock %}
+	<div class="secondary">
+		<h3> Archives </h3>
+		<nav>
+			<h4>By Date</h4>
+			{% for key, date in dates.items %}
+			<a href="{% url omblog:month date.0.year date.0.month %}"{% if forloop.counter > 12 %}class="stale"{% endif %}>{{date.0|date:"F Y"}} <span>({{date.1}})</span></a>
+			{% endfor %}
+		</nav>
+		<nav>
+			<h4>By Tag</h4>
+			{% for tag,count in tags %}
+			<a href="{{tag.get_absolute_url}}" {% if forloop.counter > 12 %}class="stale"{% endif %}>{{tag|title}} <span>({{count}})</span></a>
+			{% endfor %}
+		</nav>
+	</div>
+
+{% endblock %}
+
+
+{% block js %}
+<script type="text/javascript" defer="defer">
+$(function(){
+	$('div.secondary nav').each(function(){
+		//var nav = $(this);
+		var queue = []
+		$(this).find('.stale').each(function(){
+			queue.push($(this));
+			$(this).css({display: 'block'}).hide();
+		})
+
+		var toggler = $('<a>')
+					.addClass('toggler')
+					.css({display: 'block'})
+					.toggle(show, hide)
+					.text('Show more');
+		function show(){
+			var show_queue = queue.slice(0);
+			while(show_queue.length > 0){
+				var el = show_queue.pop();
+				el.slideDown(300);
+			}
+			$(this).text('Show less');
+		}
+
+		function hide(){
+			var hide_queue = queue.slice(0);
+			while(hide_queue.length > 0){
+				var el = hide_queue.pop();
+				el.css({display: 'block'}).slideUp(200);
+			}
+			$(this).text('Show more');
+		}
+		$(this).find('a.stale:last').after(toggler);
+	});
+	$('article').fitVids();
+});
+</script>
+{% endblock %}
