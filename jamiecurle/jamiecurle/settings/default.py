@@ -1,7 +1,7 @@
 import os
 
-ROOT = os.path.abspath('./jamiecurle')
-
+ROOT = os.path.dirname(os.path.abspath(__file__)).replace('settings', '')
+#print ROOT
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
