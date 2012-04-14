@@ -53,7 +53,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
-    'django.core.context_processors.tz',
+    #'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'jamiecurle.context_processors.disqus_developer'
 )
@@ -69,7 +69,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'jamiecurle.urls'
 
-WSGI_APPLICATION = 'jamiecurle.wsgi.application'
+#WSGI_APPLICATION = 'jamiecurle.wsgi.application'
 
 TEMPLATE_DIRS = (
    '%s/templates/' % ROOT
