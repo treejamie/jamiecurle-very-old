@@ -3,7 +3,7 @@ import os
 ROOT = os.path.abspath('./jamiecurle')
 
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
