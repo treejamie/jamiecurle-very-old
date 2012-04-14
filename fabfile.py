@@ -14,6 +14,27 @@ for key, value in configfile.items():
     setattr(env, key, value)
 #
 #
+# ------------------- PRODUCTION DEPLOY ------------------
+def deploy(commit_msg=None):
+    """performs the deploy tasks"""
+    if commit_msg is not None:
+        commit_and_push(commit_msg)
+    update_src()
+
+@with_settings(warn_only=True)
+def commit_and_push(commit_msg):
+    local('git add -A')
+    local('git commit -a -m "%s"' % commit_msg)
+    local('git push origin master')
+
+
+def update_src():
+    """updates source code on production"""
+    with cd(env.remote_src):
+        run('git pull origin master')
+
+#
+#
 # ------------------- DEVLOPMENT--------------------------
 
 def test(apps=""):
