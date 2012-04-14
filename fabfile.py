@@ -33,6 +33,9 @@ def update_src():
     with cd(env.remote_src):
         run('git pull origin master')
 
+
+def nginx_restart():
+    run('nginx -s reload')
 #
 #
 # ------------------- DEVLOPMENT--------------------------
