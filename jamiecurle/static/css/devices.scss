@@ -39,3 +39,10 @@
 		display: none !important;
 	}
 }
+
+@media screen and (min-width: 480px){
+	#about .content img{
+		max-width: 40%;
+		margin: 0 0 1em 1em;
+	}
+}

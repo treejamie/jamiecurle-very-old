@@ -1,1 +1,7 @@
-My personal site. This currently the 4th evolution. This time running on Flask.
+My personal site. This currently the 5th evolution.
+
+Now running on
+
+Django-1.4
+MySQL
+redis cache.

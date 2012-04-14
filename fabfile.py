@@ -37,7 +37,7 @@ def install_production_omblog():
     """installs cccheckout using the version in the requirements file"""
     req = local('cat requirements.txt | grep obscuremetaphor-blog',
                 capture=True)
-    remove_cccheckout()
+    remove_omblog()
     local('pip install %s' % req)
 
 

@@ -5,15 +5,24 @@ from django.http import HttpResponsePermanentRedirect
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^blog/', include('omblog.urls', namespace='omblog')),
+    url(r'^admin/',
+            include(admin.site.urls)),
+    url(r'^about.html',
+            'django.views.generic.simple.direct_to_template',
+            {'template': 'about.html'},
+            name='about'),
+    url(r'^blog/',
+            include('omblog.urls',
+            namespace='omblog')),
     # redirect tags
     # TODO - redirect tags from /tags/$TAG to /blog/tags/$TAG
     # redirect blog.html - this can be removed once the SE's have caught up
     url(r'^blog.html$',
-        lambda r: HttpResponsePermanentRedirect(reverse('omblog:index')),
-        name='blog'),
+            lambda r: HttpResponsePermanentRedirect(reverse('omblog:index')),
+            name='blog'),
 
     # finally the catch all
-    url(r'^$', 'omblog.views.index', name='home')
+    url(r'^$',
+            'omblog.views.index',
+            name='home')
 )

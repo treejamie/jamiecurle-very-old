@@ -49,7 +49,6 @@ $(function(){
 			}
 			$(this).text('Show less');
 		}
-
 		function hide(){
 			var hide_queue = queue.slice(0);
 			while(hide_queue.length > 0){
@@ -60,7 +59,9 @@ $(function(){
 		}
 		$(this).find('a.stale:last').after(toggler);
 	});
-	$('article').fitVids();
 });
 </script>
+{% block omblog_js %}
+{% endblock %}
+
 {% endblock %}

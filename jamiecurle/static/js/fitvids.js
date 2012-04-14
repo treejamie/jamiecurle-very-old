@@ -8,7 +8,6 @@
 *
 * Date: Thu Sept 01 18:00:00 2011 -0500
 */
-
 (function( $ ){
 
   $.fn.fitVids = function( options ) {

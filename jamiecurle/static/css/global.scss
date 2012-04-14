@@ -106,7 +106,6 @@ li{
 table.data{
 	width: 100%;
 	border-spacing: 0;
-	
 	th,
 	td{
 		padding: 1%;
@@ -128,7 +127,6 @@ table.data{
 	tbody td.border{
 		border-bottom: 1px solid #999;
 	}
-
 }
 
 
@@ -234,6 +232,21 @@ div.content{
 		.dsq-post-tools{
 			margin-bottom: 0;
 		}
+// about
+#about {
+	.content{
+		img{
+			float: right;
+			width: 100%;
+			max-width: 100%;
+			margin-bottom: 1em;
+			border: 1px solid #dcdcdc;
+			background-color:#ededed;
+			padding: 1%;
+
+		}
+	}
+}
 /* navigation */
 div.secondary{
 	background-color: #fefefe;
