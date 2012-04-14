@@ -14,6 +14,19 @@ urlpatterns = patterns('',
     url(r'^blog/',
             include('omblog.urls',
             namespace='omblog')),
+    url(r'^404/',
+            'django.views.generic.simple.direct_to_template',
+            {'template': '404.html'},
+            name='404'),
+    url(r'^500/',
+            'django.views.generic.simple.direct_to_template',
+            {'template': '500.html'},
+            name='404'),
+
+    url(r'^503/',
+            'django.views.generic.simple.direct_to_template',
+            {'template': '503.html'},
+            name='503'),
     # redirects - can be removed once the SE's have caught up
     #
     #
