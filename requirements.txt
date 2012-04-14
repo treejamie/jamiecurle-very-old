@@ -4,5 +4,7 @@ django-compressor
 https://github.com/obscuremetaphor/obscuremetaphor-blog/zipball/master
 django-redis-cache
 hiredis
+MySQL-python
+gunicorn
 
 

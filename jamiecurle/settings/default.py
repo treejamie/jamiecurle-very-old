@@ -97,10 +97,16 @@ COMPRESS_PRECOMPILERS = (
 )
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    }
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': '127.0.0.1:6379',
+        'OPTIONS': {
+            'DB': 0,
+            'PASSWORD': '',
+            'PARSER_CLASS': 'redis.connection.HiredisParser'
+        },
+    },
 }
+
 WSGI_APPLICATION = 'jamiecurle.wsgi.application'
 
 LOGGING = {
