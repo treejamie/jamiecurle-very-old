@@ -107,7 +107,7 @@ CACHES = {
     },
 }
 
-WSGI_APPLICATION = 'jamiecurle.wsgi.application'
+#WSGI_APPLICATION = 'jamiecurle.wsgi.application'
 
 LOGGING = {
     'version': 1,
