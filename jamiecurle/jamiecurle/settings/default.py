@@ -2,7 +2,6 @@ import os
 
 ROOT = os.path.abspath('./jamiecurle')
 
-
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
