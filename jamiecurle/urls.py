@@ -14,9 +14,11 @@ urlpatterns = patterns('',
     url(r'^blog/',
             include('omblog.urls',
             namespace='omblog')),
-    # redirect tags
-    # TODO - redirect tags from /tags/$TAG to /blog/tags/$TAG
-    # redirect blog.html - this can be removed once the SE's have caught up
+    # redirects - can be removed once the SE's have caught up
+    #
+    #
+    url(r'^tags/(?P<tag>[\w]+)$',
+            'jamiecurle.views.redirect_tags'),    
     url(r'^blog.html$',
             lambda r: HttpResponsePermanentRedirect(reverse('omblog:index')),
             name='blog'),
@@ -26,3 +28,4 @@ urlpatterns = patterns('',
             'omblog.views.index',
             name='home')
 )
+
