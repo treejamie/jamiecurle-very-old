@@ -14,7 +14,7 @@ for key, value in configfile.items():
     setattr(env, key, value)
 #
 #
-# ------------------- PRODUCTION DEPLOY ------------------
+# ------------------- PRODUCTION  ------------------------
 def deploy(commit_msg=None):
     """performs the deploy tasks"""
     if commit_msg is not None:
@@ -46,7 +46,7 @@ def gunicorn_restart():
 @with_settings(warn_only=True)
 def maintenance_end():
     """removes the 503 file to exit production from upgrade mode"""
-    run('rm %(remote_media)s/uploads/503.html' % env)
+    run('rm %(remote_media)s/503.html' % env)
 
 def nginx_restart():
     """restarts nginx"""
@@ -57,6 +57,10 @@ def pip(app):
     with prefix('workon %(remote_virtualenv)s' % env):
         run('pip install -U %s' % app)
         
+def mem():
+    """returns the memory usage of the account"""
+    run('ps -u %(user)s -o pid,rss,command' % env)
+
 #
 #
 # ------------------- DEVLOPMENT--------------------------
