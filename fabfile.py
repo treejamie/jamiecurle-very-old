@@ -19,7 +19,10 @@ def deploy(commit_msg=None):
     """performs the deploy tasks"""
     if commit_msg is not None:
         commit_and_push(commit_msg)
+    maintenance()
     update_src()
+    restart_gunicorn()
+    maintenance_end()
 
 @with_settings(warn_only=True)
 def commit_and_push(commit_msg):
@@ -27,11 +30,23 @@ def commit_and_push(commit_msg):
     local('git commit -a -m "%s"' % commit_msg)
     local('git push origin master')
 
+def maintenance():
+    """puts the 503 file to enter production into upgrade mode"""
+    put('%(local_templates)s/503.html' % env, '%(remote_media)s/uploads/' % env)
 
 def update_src():
     """updates source code on production"""
     with cd(env.remote_src):
         run('git pull origin master')
+
+def restart_gunicorn():
+    """restarts the guicorn process"""
+    run('supervisorctl restart %(supervisorctl_name)s' % env)
+
+@with_settings(warn_only=True)
+def maintenance_end():
+    """removes the 503 file to exit production from upgrade mode"""
+    run('rm %(remote_media)s/uploads/503.html' % env)
 
 
 def nginx_restart():
@@ -44,7 +59,7 @@ def test(apps=""):
     """Clears the screen and runs the tests om the test project"""
     local('clear')
     local('%s/manage.py test %s --setting=jamiecurle.settings.test'\
-                 % ( LOCAL_ROOT, apps))
+                 % ( env.local_src, apps))
 
 def kill_cache_dev(key=None):
     mc = memcache.Client(['127.0.0.1:11211'], debug=0)
