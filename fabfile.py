@@ -32,7 +32,7 @@ def commit_and_push(commit_msg):
 
 def maintenance():
     """puts the 503 file to enter production into upgrade mode"""
-    put('%(local_templates)s/503.html' % env, '%(remote_media)s/uploads/' % env)
+    put('%(local_templates)s/503.html' % env, '%(remote_media)s' % env)
 
 def update_src():
     """updates source code on production"""
