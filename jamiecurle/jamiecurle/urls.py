@@ -22,7 +22,6 @@ urlpatterns = patterns('',
             'django.views.generic.simple.direct_to_template',
             {'template': '500.html'},
             name='404'),
-
     url(r'^503/',
             'django.views.generic.simple.direct_to_template',
             {'template': '503.html'},

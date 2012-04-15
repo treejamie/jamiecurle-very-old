@@ -21,6 +21,7 @@ def deploy(commit_msg=None):
         commit_and_push(commit_msg)
     maintenance()
     update_src()
+    # TODO: rsync media
     gunicorn_restart()
     maintenance_end()
 
