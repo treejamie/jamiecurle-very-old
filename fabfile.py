@@ -21,7 +21,7 @@ def deploy(commit_msg=None):
         commit_and_push(commit_msg)
     maintenance()
     update_src()
-    restart_gunicorn()
+    gunicorn_restart()
     maintenance_end()
 
 @with_settings(warn_only=True)
@@ -39,7 +39,7 @@ def update_src():
     with cd(env.remote_src):
         run('git pull origin master')
 
-def restart_gunicorn():
+def gunicorn_restart():
     """restarts the guicorn process"""
     run('supervisorctl restart %(supervisorctl_name)s' % env)
 
@@ -48,9 +48,15 @@ def maintenance_end():
     """removes the 503 file to exit production from upgrade mode"""
     run('rm %(remote_media)s/uploads/503.html' % env)
 
-
 def nginx_restart():
+    """restarts nginx"""
     run('nginx -s reload')
+
+def pip(app):
+    """installs a pip app into the virtualenv"""
+    with prefix('workon %(remote_virtualenv)s' % env):
+        run('pip install -U %s' % app)
+        
 #
 #
 # ------------------- DEVLOPMENT--------------------------
