@@ -52,7 +52,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
-    #'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'jamiecurle.context_processors.disqus_developer'
 )
@@ -98,6 +97,7 @@ CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
         'LOCATION': '127.0.0.1:6379',
+        'KEY_PREFIX': 'mrsmoo__',
         'OPTIONS': {
             'DB': 0,
             'PASSWORD': '',

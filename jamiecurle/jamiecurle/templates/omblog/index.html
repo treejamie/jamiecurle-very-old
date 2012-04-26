@@ -1,6 +1,7 @@
 {% extends 'omblog/base.html' %}
 
 {% load jamiecurle_tags %}
+{% load omblog_tags %}
 
 {% block title %} Blog Archive {% endblock %}
 
@@ -8,10 +9,17 @@
 
 {% block blog_content %}
 	{% for post in posts %}
-		<div class="blog" style="border-left-color:{{post.created|colour_for_date}};">
-			<h1><a href="{{post.get_absolute_url}}">{{post.title}}</a></h1>
-			<p>{{post.description}}</p>
-			<p class="meta">{{post.created|date}}</p>
+		<div class="blog {% post_status post %}"
+			style="border-left-color:{{post.created|colour_for_date}};">
+				<h1>
+					<a href="{{post.get_absolute_url}}">{{post.title}}
+						{% if post.status != 3 %}
+						({% post_status post %})
+					{% endif %}
+					</a>
+				</h1>
+				<p>{{post.description}}</p>
+				<p class="meta">{{post.created|date}}</p>
 		</div>
 	{% endfor %}
 {% endblock %}

@@ -19,6 +19,7 @@ def deploy(commit_msg=None):
     """performs the deploy tasks"""
     if commit_msg is not None:
         commit_and_push(commit_msg)
+    rsync_media()
     maintenance()
     update_src()
     # TODO: rsync media
@@ -61,6 +62,10 @@ def pip(app):
 def mem():
     """returns the memory usage of the account"""
     run('ps -u %(user)s -o pid,rss,command' % env)
+
+def rsync_media():
+    local("rsync -avz %(local_media)s/ -e ssh %(ssh_string)s:%(remote_media)s/" 
+            % env)
 
 #
 #
