@@ -1,5 +1,4 @@
 import os
-import memcache
 import yaml
 from fabric.api import *
 
@@ -76,13 +75,6 @@ def test(apps=""):
     local('clear')
     local('%s/manage.py test %s --setting=jamiecurle.settings.test'\
                  % ( env.local_src, apps))
-
-def kill_cache_dev(key=None):
-    mc = memcache.Client(['127.0.0.1:11211'], debug=0)
-    if key is None:
-        mc.flush_all()
-    else:
-        mc.delete(key)
 
 #
 #

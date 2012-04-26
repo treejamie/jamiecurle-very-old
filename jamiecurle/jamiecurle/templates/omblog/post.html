@@ -7,8 +7,13 @@
 {% block title %}{{post.title}}{% endblock%}
 
 {% block blog_content %}
+
+
 <article>
 	<header style="border-bottom-color: {{post.created|colour_for_date}}">
+		{% if user.is_authenticated %}
+			<a class="edit" href="{{post.edit_url}}">edit</a>
+		{% endif %}
 		<h1>{{post.title}}</h1>
 		<p class="meta">
 			Posted {{post.created|date}}. 

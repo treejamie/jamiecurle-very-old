@@ -22,6 +22,7 @@ django.jQuery(function($){
 	activate = function(){
 		var width = $(document).width();
 		var height = $(document).height();
+		var stateObj = {writing: true};
 		$('#id_source_content')
 			.focus()
 			.parent()
@@ -72,7 +73,17 @@ django.jQuery(function($){
 			    return false;
 			});
 
-	$(document).keyup(function(e) {
+	$(window).keyup(function(e) {
 	  if (e.keyCode == 27) { deactivate() }   // esc
 	});
+	
+	$(window).resize(function(){
+		var width = $(window).width();
+		var height = $(window).height();
+		console.log(width)
+		$('div.writing')
+			.width(width)
+			.height(height)
+	})
 })
+
