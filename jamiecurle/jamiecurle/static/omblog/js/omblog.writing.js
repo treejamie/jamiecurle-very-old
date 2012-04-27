@@ -22,7 +22,6 @@ django.jQuery(function($){
 	activate = function(){
 		var width = $(document).width();
 		var height = $(document).height();
-		var stateObj = {writing: true};
 		$('#id_source_content')
 			.focus()
 			.parent()
@@ -46,6 +45,9 @@ django.jQuery(function($){
 
 	submit = function(){
 				$('a.ajax_progress').show();
+				$('#id_tags_to option').each(function(){
+					$(this).attr('selected', 'selected');
+				})
 				data = $('#content-main form').serialize();
 				$.ajax({
 				  type: 'POST',
@@ -73,17 +75,7 @@ django.jQuery(function($){
 			    return false;
 			});
 
-	$(window).keyup(function(e) {
+	$(document).keyup(function(e) {
 	  if (e.keyCode == 27) { deactivate() }   // esc
 	});
-	
-	$(window).resize(function(){
-		var width = $(window).width();
-		var height = $(window).height();
-		console.log(width)
-		$('div.writing')
-			.width(width)
-			.height(height)
-	})
 })
-
