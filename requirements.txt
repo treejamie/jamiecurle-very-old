@@ -1,7 +1,7 @@
 Django==1.4
 south
 django-compressor
-https://github.com/downloads/obscuremetaphor/obscuremetaphor-blog/obscuremetaphor-blog-0.0.7.tar.gz
+https://github.com/downloads/obscuremetaphor/obscuremetaphor-blog/obscuremetaphor-blog-0.0.7.1.tar.gz
 django-redis-cache
 hiredis
 MySQL-python
