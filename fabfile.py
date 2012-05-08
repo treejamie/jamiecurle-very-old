@@ -18,7 +18,7 @@ def deploy(commit_msg=None):
     """performs the deploy tasks"""
     if commit_msg is not None:
         commit_and_push(commit_msg)
-    rsync_media()
+    push_media()
     maintenance()
     update_src()
     # TODO: rsync media
@@ -62,7 +62,7 @@ def mem():
     """returns the memory usage of the account"""
     run('ps -u %(user)s -o pid,rss,command' % env)
 
-def rsync_media():
+def push_media():
     local("rsync -avz %(local_media)s/ -e ssh %(ssh_string)s:%(remote_media)s/" 
             % env)
 
@@ -107,34 +107,3 @@ def install_dev_omblog():
     local('ln -s %(omblog_src)s %(site_packages)s/omblog' % env )
 
 
-
-
-#
-#
-# ---------------------- OLDSTUFF ------------------------
-"""
-#import datetime
-#import memcache
-
-@with_settings(warn_only=True):
-def install_dev_omblog():
-
-    local('rm -rf %s/omblog %s/obscuremetaphor_blog-0.0.3-py2.7.egg-info' % 
-                (om_settings.SITE_PACKAGES, om_settings.SITE_PACKAGES))
-    local('ln -s  %s %somblog' % 
-                (om_settings.DEV_OMBLOG_PATH, om_settings.SITE_PACKAGES))
-
-
-
-
-def compress_css():
-    with lcd('/Users/jcurle/Sites/jamiecurle/jamiecurle/static/css/'):
-        local('cssprefixer global.css about.css syntax.css devices.css  --minify > production.css')
-
-def mem():
-    run('ps -u curle -o pid,rss,command')
-
-def restart_nginx():
-    run('nginx -s reload')
-
-"""

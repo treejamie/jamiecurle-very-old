@@ -54,6 +54,12 @@ p, li{
 p, ul, ol, div, table{
 	margin-bottom: 2em;
 }
+blockquote{
+	border-left: 0.4em solid #ccc;
+	font-style: italic;
+	color: #666;
+	padding-left: 1em;
+}
 li{
 	margin-bottom: 1.25em;
 }
