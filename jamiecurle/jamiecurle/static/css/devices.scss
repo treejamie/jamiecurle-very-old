@@ -40,7 +40,10 @@
 	}
 }
 
-@media screen and (min-width: 480px){
+@media screen and (max-width: 480px){
+	div.highlight{
+		font-size: 0.75em;
+	}
 	#about .content img{
 		max-width: 40%;
 		margin: 0 0 1em 1em;

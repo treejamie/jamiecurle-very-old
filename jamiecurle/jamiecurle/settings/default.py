@@ -93,7 +93,7 @@ COMPRESS_ENABLED = True
 COMPRESS_PRECOMPILERS = (
     ('text/x-sass', '/usr/bin/sass {infile} {outfile}'),
 )
-CACHES = {
+"""CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
         'LOCATION': '127.0.0.1:6379',
@@ -105,7 +105,7 @@ CACHES = {
         },
     },
 }
-
+"""
 #WSGI_APPLICATION = 'jamiecurle.wsgi.application'
 
 LOGGING = {
