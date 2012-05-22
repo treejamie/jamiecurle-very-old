@@ -21,7 +21,12 @@
 	td.code{
 		padding-left: 25px;
 	}
+	#about .content img{
+		width: 30%;
+		float: right;
+	}
 }
+
 @media screen and (min-width: 1370px){
 	#blog div.secondary{
 		position: absolute;
