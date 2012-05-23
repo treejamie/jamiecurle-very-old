@@ -37,14 +37,16 @@ h6{
 	font-size: 1.15em;
 }
 code{
-	background-color: #ececec;
-	padding: 0.2em 0.5em;
+	background-color: rgba(#ccc, 0.2);
+	border: 1px solid  rgba(#ccc, 0.4);
+	padding: 0.01em 0.5em;
 	text-shadow: 1px 1px 1px #fff;
-	font-style: italic;
+	font-family:  'Inconsolata' !important ;
+	border-radius: 2px;
+	display: inline-block;
 }
 em{
 	color: #999;
-	font-size: 0.8em;
 	padding: 0 0.3em;
 }
 a{
@@ -205,6 +207,7 @@ div.content{
 		border: 1px solid #dcdcdc;
 		background-color:#ededed;
 		padding: 1%;
+		border-radius: 2px;
 	}
 	img,
 	video{

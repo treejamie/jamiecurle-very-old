@@ -2,17 +2,22 @@ div.highlight{
 	color: #999;
 	border-radius: 2px;
 	font-size: 1em;
-	width: 100%;
 	word-wrap: break-word  !important;
 	line-height: 1.5em;
-	margin-bottom: 16px;
+	margin-bottom: 1em;
 	border-spacing: 0;
+	border: 1px solid #dcdcdc;
+	background-color:#ededed;
 	padding: 1%;
-	background-color: #2e2e2e;
 }
 
 pre{
 	white-space: pre-wrap;
+	width: 98%;
+	border-radius: 2px;
+	margin: 0;
+	padding: 1%;
+	background-color: #2e2e2e;
 	font-family:  'Inconsolata' !important ;
 }
 
