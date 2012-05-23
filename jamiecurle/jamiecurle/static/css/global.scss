@@ -15,8 +15,9 @@ h3,
 h4,
 h5,
 h6{
-	font-weight: 400;
+	font-family: 'rooney-web';
 	line-height: 1.25em;
+	font-weight: 400;
 }
 h1{
 	font-size: 2.5em;
@@ -95,7 +96,8 @@ li{
 				display: inline-block;
 				width: 1.2em;
 				text-align: center;
-				font-weight: 100;
+				font-weight: 500;
+				font-family: 'ff-dagny-web-pro';
 				&:hover{
 					background-color: #F5000E;
 				}
@@ -107,10 +109,13 @@ li{
 			float: right;
 			margin-right: 0;
 			a{
-				font-size: 0.8em;
-				font-weight: 500;
+
+				font-family: 'rooney-web';
+				font-size: 1em;
+				font-weight: 400;
 				color: #3e3e3e;
 				text-transform: uppercase;
+				display: inline-block;
 				padding-right: 2em;
 				&:hover{
 					color: #000;
